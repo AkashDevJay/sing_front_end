@@ -15,7 +15,6 @@ export const dataTransferJobsSlice = createSlice({
             job && (job.executed = !job.executed);
         },
         removeJob: (state, action) => {
-            debugger
             let job = state.jobs.filter(j => j.id == action.payload.id);
             console.log(`jobs in reducer : ${state.jobs}`)
             const index = state.jobs.indexOf(job);

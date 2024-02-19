@@ -29,9 +29,6 @@ export function TabView () {
 
     const closeTab = (id) => {
         console.log(`closing job ID : ${id}`);
-        if(value === id) {
-            setValue(jobs?.jobs && jobs.jobs.length > 0 ?  jobs.jobs.length - 1 : "1")
-        }
         dispatch(removeJob({
             id
         }))

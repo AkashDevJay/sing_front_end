@@ -15,8 +15,13 @@ export const dataTransferJobsSlice = createSlice({
             job && (job.executed = !job.executed);
         },
         removeJob: (state, action) => {
-            let job = state.jobs.filter(j => j.id === action.payload.id);
-            job && (state.jobs(job));
+            let job = state.jobs.filter(j => j.id == action.payload.id);
+            console.log(`jobs in reducer : ${state.jobs}`)
+            const index = state.jobs.indexOf(job);
+            console.log(`index : ${index}`)
+            if(index > -1) {
+                state.jobs = state.jobs.splice(index, 1);
+            }
         }
     }
 });

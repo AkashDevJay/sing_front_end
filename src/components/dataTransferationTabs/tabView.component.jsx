@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { removeJob } from "../../store/features/dataTransfer/dataTransferJobSlice";
 import { TabContent } from "./tabContent.component";
+import { findClosestJob } from "../../utils/closestJobUtil";
 
 export function TabView () {
 
@@ -31,7 +32,9 @@ export function TabView () {
         console.log(`closing job ID : ${id}`);
         dispatch(removeJob({
             id
-        }))
+        }));
+        let index = findClosestJob(dataTransferJobs.jobs, id).toString();
+        setValue(index)
     }
 
     const generateTabs = () => {
@@ -52,7 +55,7 @@ export function TabView () {
 
     return (
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabContext value={value}>
+            <TabContext value={value.toString()}>
                 <TabList onChange={handleChange} aria-label="Sources And Targets">
                     {generateTabs()}
                 </TabList>

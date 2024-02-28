@@ -8,7 +8,7 @@ import { addJob } from "../store/features/dataTransfer/dataTransferJobSlice";
 
 export function SelectorDropdown () {
 
-    const jobs = useSelector((state) => state.dataTransferJobs.jobs);
+    const jobs = useSelector((state) => state.dataTransferJobs);
     const dispatch = useDispatch();
 
     const [source, setSource] = useState('GET');
@@ -24,7 +24,7 @@ export function SelectorDropdown () {
 
     const createWorkplace = () => {
         dispatch(addJob({
-            id: jobs.length + 1,
+            id: jobs.jobCount + 1,
             source,
             target,
             executed: false

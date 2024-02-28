@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
     jobCount: 0,
@@ -9,19 +9,19 @@ export const dataTransferJobsSlice = createSlice({
     name: 'dataTransferJobs',
     initialState,
     reducers: {
-        addJob: (state, action) => void(state.jobs.push(action.payload)),
+        addJob: (state, action) => {
+            state.jobs.push(action.payload);
+            state.jobCount++;   
+        },
         executeJob: (state, action) => {
             let job = state.jobs.filter(j => j.id === action.payload.id);
             job && (job.executed = !job.executed);
         },
         removeJob: (state, action) => {
-            let job = state.jobs.filter(j => j.id == action.payload.id);
-            console.log(`jobs in reducer : ${state.jobs}`)
-            const index = state.jobs.indexOf(job);
-            console.log(`index : ${index}`)
-            if(index > -1) {
-                state.jobs = state.jobs.splice(index, 1);
-            }
+            console.log(current(state));
+            let job = current(state).jobs.find(j => j.id == action.payload.id);
+            let index = current(state).jobs.indexOf(job);
+            state.jobs.splice(index, 1);
         }
     }
 });
